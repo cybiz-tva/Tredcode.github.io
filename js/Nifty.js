@@ -83,18 +83,27 @@ $(document).ready(function () {
         Chart_Nifty_50 = data
         console.log("NIFTY_50 Data: " + data + "\nStatus: " + status);
         console.log(Chart_Nifty_50);
+        if(Chart_Nifty_50.length == 0){
+            Chart_Nifty_50 = [[0,0,0,0,0],[0,0,0,0,0]]
+        }
     });
 
     $.post("https://students.tradingcafeindia.com/tc_indicator/chart", { 'script': 'NIFTY BANK' }, function (data, status) {
         Chart_Nifty_Bank = data
         console.log("NIFTY_BANK Data: " + data + "\nStatus: " + status);
         console.log(Chart_Nifty_Bank);
+        if(Chart_Nifty_Bank.length == 0){
+            Chart_Nifty_Bank = [[0,0,0,0,0],[0,0,0,0,0]]
+        }
     });
 
     $.post("https://students.tradingcafeindia.com/tc_indicator/chart", { 'script': 'NIFTY FIN SERVICE' }, function (data, status) {
         Chart_Nifty_Fin_Service = data
         console.log("NIFTY_FIN_SERVICE Data: " + data + "\nStatus: " + status);
         console.log(Chart_Nifty_Fin_Service);
+        if(Chart_Nifty_Fin_Service.length == 0){
+            Chart_Nifty_Fin_Service = [[0,0,0,0,0],[0,0,0,0,0]]
+        }
     });
 
 
@@ -1054,6 +1063,21 @@ $(document).ready(function () {
             }])
     })
 
+    // Data for Nifty Candlestick
+    // if (Chart_Nifty_50.length != 0) {
+    //     numberArray_1 = [];
+    //     numberArray_2 = [];
+    //     length_1 = Chart_Nifty_50.length;
+    //     for (var i = 0; i < length_1; i++) {
+    //         for (var j = 0; j < Chart_Nifty_50[0].length; j++) {
+    //             numberArray_2.push(parseFloat(Chart_Nifty_50[i][j]));
+    //         }
+    //         numberArray_1.push(numberArray_2);
+    //         numberArray_2 = []
+    //     }
+    //     console.log(numberArray_1);
+    // }
+
     // Data for Nifty Bar (For 1st dropdown value)
     if (Bar_Nifty_50_exp_1.length != 0) {
         Array_1 = [];
@@ -1068,6 +1092,9 @@ $(document).ready(function () {
             Array_2 = []
         }
         console.log(Array_1);
+    }
+    else if (Bar_Nifty_50_exp_1.length == 0){
+        Array_1 = [[0,0],[0,0]]
     }
 
     // For Sentiment Dial (Calculation Part)
@@ -1129,6 +1156,9 @@ $(document).ready(function () {
         }
         console.log(Array_1_exp_2);
     }
+    else if (Bar_Nifty_50_exp_2.length == 0){
+        Array_1_exp_2 = [[0,0],[0,0]]
+    }
 
     // For Sentiment Dial (Calculation Part)
     if (Array_1_exp_2.length != 0) {
@@ -1183,6 +1213,21 @@ $(document).ready(function () {
         Bottom_Right_Array_1_exp_2 = [0,0,0]
     }
 
+    // Data for Nifty_Bank Candlestick
+    // if (Chart_Nifty_Bank.length != 0) {
+    //     numberArray_3 = [];
+    //     numberArray_4 = [];
+    //     length_2 = Chart_Nifty_Bank.length;
+    //     for (var i = 0; i < length_2; i++) {
+    //         for (var j = 0; j < Chart_Nifty_Bank[0].length; j++) {
+    //             numberArray_4.push(parseFloat(Chart_Nifty_Bank[i][j]));
+    //         }
+    //         numberArray_3.push(numberArray_4);
+    //         numberArray_4 = []
+    //     }
+    //     console.log(numberArray_3);
+    // }
+
     // Data for Nifty_Bank (For 1st dropdown value)
     if (Bar_Nifty_Bank_exp_1.length != 0) {
         Array_3 = [];
@@ -1198,7 +1243,10 @@ $(document).ready(function () {
         }
         console.log(Array_3);
     }
-
+    else if(Bar_Nifty_Bank_exp_1.length == 0 ){
+        Array_3 = [[0,0],[0,0]]
+    }
+    
     // For Sentiment Dial (Calculation Part)
     if (Array_3.length != 0) {
         Nifty_Bank_exp_1_A = 0
@@ -1238,6 +1286,9 @@ $(document).ready(function () {
             Array_4_exp_2 = []
         }
         console.log(Array_3_exp_2);
+    }
+    else if(Bar_Nifty_Bank_exp_2.length == 0 ){
+        Array_3_exp_2 = [[0,0],[0,0]]
     }
 
     // For Sentiment Dial (Calculation Part)
@@ -1293,6 +1344,21 @@ $(document).ready(function () {
         Bottom_Right_Array_2_exp_2 = [0,0,0]
     }
 
+    // Data for Nifty_Fin_Service Candlestick
+    // if (Chart_Nifty_Fin_Service.length != 0) {
+    //     numberArray_5 = [];
+    //     numberArray_6 = [];
+    //     length_3 = Chart_Nifty_Fin_Service.length;
+    //     for (var i = 0; i < length_3; i++) {
+    //         for (var j = 0; j < Chart_Nifty_50[0].length; j++) {
+    //             numberArray_6.push(parseFloat(Chart_Nifty_Fin_Service[i][j]));
+    //         }
+    //         numberArray_5.push(numberArray_6);
+    //         numberArray_6 = []
+    //     }
+    //     console.log(numberArray_5);
+    // }
+
     // Data for Nifty_Fin_Service Bar (For 1st dropdown value)
     if (Bar_Nifty_Fin_Service_exp_1.length != 0) {
         Array_5 = [];
@@ -1307,6 +1373,9 @@ $(document).ready(function () {
             Array_6 = []
         }
         console.log(Array_5);
+    }
+    else if(Bar_Nifty_Fin_Service_exp_1.length == 0 ){
+        Array_5 = [[0,0],[0,0]]
     }
 
     // For Sentiment Dial (Calculation Part)
@@ -1348,6 +1417,9 @@ $(document).ready(function () {
             Array_6_exp_2 = []
         }
         console.log(Array_5_exp_2);
+    }
+    else if(Bar_Nifty_Fin_Service_exp_2.length == 0 ){
+        Array_5_exp_2 = [[0,0],[0,0]]
     }
 
     // For Sentiment Dial (Calculation Part)
@@ -1452,6 +1524,21 @@ $(document).ready(function () {
             var mins = moment.utc(moment(end, "h:mm:").diff(moment(start, "h:mm"))).format("mm")
             console.log("mins = ", mins)
 
+            // s = start.split(':');
+            // e = end.split(':');
+
+            // console.log("s = "+s)
+            // console.log("e = "+e)
+
+            // min = e[1] - s[1];
+            // hour_carry = 0;
+            // if (min < 0) {
+            //     min += 60;
+            //     hour_carry += 1;
+            // }
+            // hour = e[0] - s[0] - hour_carry;
+            // diff = hour + "." + min;
+            // console.log("diff = ",diff)
             How_many_times_addition = Math.round(parseFloat(mins) / 3) - 1
             console.log('How_many_times_addition = ' + How_many_times_addition)
             Dummy = []
@@ -1480,6 +1567,22 @@ $(document).ready(function () {
             var mins = moment.utc(moment(end, "h:mm:").diff(moment(start, "h:mm"))).format("mm")
             console.log("mins = ", mins)
 
+            // s = start.split(':');
+            // e = end.split(':');
+
+            // console.log("s = "+s)
+            // console.log("e = "+e)
+
+            // min = e[1] - s[1];
+            // hour_carry = 0;
+            // if (min < 0) {
+            //     min += 60;
+            //     hour_carry += 1;
+            // }
+            // hour = e[0] - s[0] - hour_carry;
+            // diff = hour + "." + min;
+            // console.log("diff = ",diff)
+
             How_many_times_addition = Math.round(parseFloat(mins) / 3) + 1
             console.log('How_many_times_addition = ' + How_many_times_addition)
             for (var i = How_many_times_addition; i < Array_1.length; i++) {
@@ -1489,6 +1592,10 @@ $(document).ready(function () {
             Array_1 = Dummy_1
             console.log(Array_1)
         }
+        // else if (First_candle_time == First_Histo_time) {
+        //     console.log('Directly start')
+        //     console.log('No need to add')
+        // }
 
         if (First_candle_time < First_Histo_time_exp_2) {
             console.log('start from First_candle_time')
@@ -1498,6 +1605,22 @@ $(document).ready(function () {
 
             var mins = moment.utc(moment(end, "h:mm:").diff(moment(start, "h:mm"))).format("mm")
             console.log("mins = ", mins)
+
+            // s = start.split(':');
+            // e = end.split(':');
+
+            // console.log("s = "+s)
+            // console.log("e = "+e)
+
+            // min = e[1] - s[1];
+            // hour_carry = 0;
+            // if (min < 0) {
+            //     min += 60;
+            //     hour_carry += 1;
+            // }
+            // hour = e[0] - s[0] - hour_carry;
+            // diff = hour + "." + min;
+            // console.log("diff = ",diff)
 
             How_many_times_addition = Math.round(parseFloat(mins) / 3) - 1
             Dummy = []
@@ -1524,6 +1647,22 @@ $(document).ready(function () {
             var mins = moment.utc(moment(end, "h:mm:").diff(moment(start, "h:mm"))).format("mm")
             console.log("mins = ", mins)
 
+            // s = start.split(':');
+            // e = end.split(':');
+
+            // console.log("s = "+s)
+            // console.log("e = "+e)
+
+            // min = e[1] - s[1];
+            // hour_carry = 0;
+            // if (min < 0) {
+            //     min += 60;
+            //     hour_carry += 1;
+            // }
+            // hour = e[0] - s[0] - hour_carry;
+            // diff = hour + "." + min;
+            // console.log("diff = ",diff)
+
             How_many_times_addition = Math.round(parseFloat(mins) / 3) + 1
             for (var i = How_many_times_addition; i < Array_1_exp_2.length; i++) {
                 Dummy_1.push(Array_1_exp_2[i])
@@ -1531,6 +1670,10 @@ $(document).ready(function () {
             Array_1_exp_2 = []
             Array_1_exp_2 = Dummy_1
         }
+        // else if (First_candle_time == First_Histo_time_exp_2) {
+        //     console.log('Directly start')
+        //     console.log('No need to add')
+        // }
 
         let Last_candle_time = parseFloat(moment.unix(parseFloat(Chart_Nifty_50[Chart_Nifty_50.length - 1][0])).format('h.mm'))
         console.log("Last_candle_time = " + Last_candle_time)
@@ -1586,6 +1729,10 @@ $(document).ready(function () {
                 console.log(Array_1)
             }
         }
+        // else if (Last_candle_time == Last_Histo_time) {
+        //     console.log('Directly start')
+        //     console.log('No need to add')
+        // }
 
         if (Last_candle_time >= Last_Histo_time_exp_2) {
             console.log('start from Last_candle_time')
@@ -1627,6 +1774,10 @@ $(document).ready(function () {
                 Array_1_exp_2.pop()
             }
         }
+        // else if (Last_candle_time == Last_Histo_time_exp_2) {
+        //     console.log('Directly start')
+        //     console.log('No need to add')
+        // }
 
 
 
