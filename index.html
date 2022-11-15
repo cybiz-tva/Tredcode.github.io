@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script scr="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Tredcode</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- ti-icons  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/dial.css">
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="32x32" />
+    <link rel="icon" href="img/Tredcode_logo.png" sizes="192x192" />
+
+    <!-- Apexchart  -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Canvas.js -->
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.stock.min.js"></script>
+    <style>
+        .canvasjs-navigator-panel {
+            display: none !important;
+        }
+
+        .canvasjs-chart-credit {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Highchart -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+
+
+    <style>
+        .highcharts-xaxis-grid,
+        .highcharts-credits {
+            display: none !important;
+        }
+
+        .highcharts-point-down {
+            fill: rgb(255, 108, 108) !important;
+            stroke: rgb(255, 108, 108) !important;
+        }
+
+        .highcharts-point-up {
+            fill: rgb(66, 177, 66) !important;
+            stroke: rgb(66, 177, 66) !important;
+        }
+    </style>
+
+    <!-- Sentiment Dials  -->
+    <!-- Gauge Chart -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+
+</head>
+
+<body style="font-family: 'Outfit', sans-serif; overflow-x:hidden; background-color:#0e0e0e;">
+    <div class="px-0" style="width: 100%;">
+        <div class="row mx-3 my-3">
+            <div class="col bg-color rounded text-light p-0">
+                <div class="row text-center" style="padding:1% !important;">
+                    <div class="col-md-7">
+                        <div class="container h-100">
+                            <div class="row h-100">
+                                <div class="col mx-0 px-0 bg-color text-light d-flex justify-content-center"
+                                    style="padding: 1% !important">
+                                    <button
+                                        class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded gb_active"
+                                        id="nifty_btn" type="button">NIFTY</button>
+                                </div>
+                                <div class="col mx-0 px-0 bg-color text-light d-flex justify-content-center"
+                                    style="padding: 1% 2% 1% 2% !important">
+                                    <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                        id="bnknifty_btn" type="button">BANKNIFTY</button>
+                                </div>
+                                <div class="col mx-0 px-0 bg-color text-light d-flex justify-content-center"
+                                    style="padding: 1% !important">
+                                    <button class="go_btn bg-color text-white font-weight-bold w-100 h-100 rounded"
+                                        id="finnifty_btn" type="button">FINNIFTY</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" id="drop_down_time_expiry">
+                        <div class="container d-flex justify-content-end">
+                            <div class="row d-inline-flex">
+                                <div class="col-6">
+                                    <div class="container">
+                                        <div class="pb-2 px-0 row text-left" id="Time_heading_span">
+                                            <span class="font-weight-bold">Time</span>
+                                        </div>
+                                        <div class="py-1 row" id="Time_dropdown">
+                                            <select class="bg-faint rounded h-50" id="Time_Frame" style="width: 105px;">
+                                                <option value="3m">3m</option>
+                                                <option value="15m">15m</option>
+                                                <option value="30m">30m</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="container">
+                                        <div class="pb-2 row text-left" id="Expiry_heading_span">
+                                            <span class="font-weight-bold">Expiry</span>
+                                        </div>
+                                        <div class="py-1 px-0 row" id="Expiry_dropdown">
+                                            <select class="px-0 bg-faint rounded" id="Expiry" style="width: 145px;">
+                                                <!-- Data from Backend  -->
+                                                <option id="1st_dropdown_value" value=""></option>
+                                                <option id="2nd_dropdown_value" value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-0 px-0" style="width: 100%;">
+        <div class="row mx-3 mb-3">
+            <div class="col-md-8 bg-color rounded">
+                <div class="rounded" id="chart" style="height:100%;width: 100%;"></div>
+            </div>
+            <div class="ms-3 col-md bg-color rounded" id="Dials_and_Bar">
+
+                <div class="mt-3 pt-5 container-G5piCoZi" id="sentiment_dial">
+                    <div class="speedometerWrapper-G5piCoZi G5piCoZi">
+                        <div class="speedometerTextWrapper-G5piCoZi">
+                            <span class="speedometerText-G5piCoZi textTop-G5piCoZi">Neutral</span>
+                            <span class="middleSignals-G5piCoZi">
+                                <span class="speedometerText-G5piCoZi">Sell</span>
+                                <span class="speedometerText-G5piCoZi">Buy</span>
+                            </span>
+                            <span class="bottomSignals-G5piCoZi">
+                                <span class="speedometerText-G5piCoZi textBottom-G5piCoZi">
+                                    <span class="textBottomWrap-G5piCoZi">Strong Sell</span>
+                                </span>
+                                <span class="speedometerText-G5piCoZi textBottom-G5piCoZi">
+                                    <span class="textBottomWrap-G5piCoZi">Strong Buy</span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="sizeWrapper-G5piCoZi">
+                            <div class="circleWrapper-G5piCoZi">
+                                <div class="semicircle-G5piCoZi semicircleStrongSell-G5piCoZi"
+                                    id="sentiment_dial_Color"></div>
+                            </div>
+                            <div class="dot-G5piCoZi"></div>
+                            <div class="arrow-G5piCoZi arrowStrongSell-G5piCoZi arrowShudderStrongSell-G5piCoZi"
+                                id="sentiment_dial_Arrow">
+                                <div class="arrowMain-G5piCoZi"></div>
+                                <div class="arrowHidden-G5piCoZi"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="pt-4 d-flex justify-content-center text-white">Sentiment Dial</span>
+                <div class="mt-3 pt-5 container-G5piCoZi" id="PCM">
+                    <div class="speedometerWrapper-G5piCoZi G5piCoZi">
+                        <div class="speedometerTextWrapper-G5piCoZi">
+                            <span class="speedometerText-G5piCoZi textTop-G5piCoZi">Neutral</span>
+                            <span class="middleSignals-G5piCoZi">
+                                <span class="speedometerText-G5piCoZi">Sell</span>
+                                <span class="speedometerText-G5piCoZi">Buy</span>
+                            </span>
+                            <span class="bottomSignals-G5piCoZi">
+                                <span class="speedometerText-G5piCoZi textBottom-G5piCoZi">
+                                    <span class="textBottomWrap-G5piCoZi">Strong Sell</span>
+                                </span>
+                                <span class="speedometerText-G5piCoZi textBottom-G5piCoZi">
+                                    <span class="textBottomWrap-G5piCoZi">Strong Buy</span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="sizeWrapper-G5piCoZi">
+                            <div class="circleWrapper-G5piCoZi">
+                                <div class="semicircle-G5piCoZi semicircleBuy-G5piCoZi" id="PCM_Color"></div>
+                            </div>
+                            <div class="dot-G5piCoZi"></div>
+                            <div class="arrow-G5piCoZi arrowStrongBuy-G5piCoZi arrowShudderBuy-G5piCoZi" id="PCM_Arrow">
+                                <div class="arrowMain-G5piCoZi"></div>
+                                <div class="arrowHidden-G5piCoZi"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="pt-4 d-flex justify-content-center text-white">PCR</span>
+                <div class="pt-5 d-flex justify-content-center" id="chart_2" style="height: 300px; width: 100%;"></div>
+                <span class="pb-3 d-flex justify-content-center text-white">Test Options Bars</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Back to Top  -->
+    <div class="top_arrow bg-color" onclick="$('html, body').animate({ scrollTop: 0 },'slow');">
+        <i class="ti-angle-double-up text-light"></i>
+    </div>
+
+
+
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js'></script>
+    <script src='https://cdn3.devexpress.com/jslib/17.1.6/js/dx.all.js'></script>
+    <!-- <script src="./script.js"></script> -->
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+        </script>
+    <!-- JavaScript -->
+    <script src="js/Nifty.js"></script>
+
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
