@@ -3,7 +3,7 @@ function call_Expiry_API(script) {
     $.post("https://students.tradingcafeindia.com/tc_indicator/get_running_expiry", { 'script': script }, function (data, status) {
         Expiry_data = data
     });
-
+    console.log("API FUNCTION CALL")
     var x = moment.unix(Expiry_data[0][0]).format('MMM-D')
     var y = moment.unix(Expiry_data[1][0]).format('MMM-D')
     $('#1st_dropdown_value').attr('value', x)
@@ -24,6 +24,7 @@ function call_Candlestick_API(script) {
             Candle_data = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
         }
     });
+    console.log("CANDLESTICK FUNCTION CALL")
     return Candle_data
 }
 
@@ -32,6 +33,7 @@ function call_Volume_API(script, exp_date) {
     $.post("https://students.tradingcafeindia.com/tc_indicator/op_histogram", { 'script': script, 'exp': exp_date }, function (data, status) {
         Volume_data = data
     });
+    console.log("VOLUME FUNCTION CALL")
     return Volume_data
 }
 
@@ -40,6 +42,7 @@ function call_Bottom_Right_Bar_API(script, exp_date, exp_type) {
     $.post("https://students.tradingcafeindia.com/tc_indicator/op_bargraph", { 'script': script, 'exp': exp_date, 'exp_type': exp_type }, function (data, status) {
         Bottom_Right_Bar_data = data
     });
+    console.log("BOTTOM RIGHT BAR FUNCTION CALL")
     return Bottom_Right_Bar_data
 }
 
@@ -67,6 +70,7 @@ function call_Dial_API(script, exp_date, exp_type) {
         $('#PCM_Arrow').removeClass()
         $('#PCM_Arrow').addClass('arrow-G5piCoZi arrowNeutral-G5piCoZi arrowShudderNeutral-G5piCoZi')
     }
+    console.log("PCM DIAL FUNCTION CALL")
     return Dial_data
 }
 
@@ -149,6 +153,7 @@ function calculation_for_Exp_1(vol_data, Bar_data) {
         Bottom_Right_Array_1 = [0, 0, 0]
     }
 
+    console.log("CALCULATION FUNCTION CALL")
     return [Array_1, Bottom_Right_Array_1]
 }
 
@@ -307,6 +312,8 @@ function ohlc_and_Volume(candlestick_data) {
                 color: VolumeBarColor(parseFloat(Array_1[i][1]))
             });
         }
+
+        console.log("OHLC AND VOLUME FUNCTION CALL")
     }
 }
 
@@ -330,7 +337,7 @@ function update_all_chart(title, ohlc, Volume) {
                 for (var i = 0; i < this.points.length; i++) {
                     if (i == 0) {
                         if (i == 0) {
-                            console.log(this.points[i].y)
+                            // console.log(this.points[i].y)
                             for (var j = 0; j < ohlc.length; j++) {
                                 if (this.points[i].y == ohlc[j][4]) {
                                     i = j
@@ -375,18 +382,21 @@ function update_all_chart(title, ohlc, Volume) {
 
 // function for 15min data
 function ohlc_and_Volume_15min(candlestick_data) {
+    console.log("15 MIN FUNCTION CALL")
     if (counter_for_Nifty_15min == 0) {
         counter_for_Nifty_15min += 1
         candlestick_data_15min = []       // for Candlestick
         sample = []
+        console.log("ohlc: ", ohlc)
         numberArray_1 = ohlc
         let Quotient = Math.trunc(candlestick_data.length / 5);
         let Remainder = candlestick_data.length % 5;
         let Last_i_position = Quotient * 5;
+        console.log("Last i position = ",Last_i_position)
         for (var i = 0; i < candlestick_data.length; i++) {
             sample.push(numberArray_1[i][0], numberArray_1[i][1])
             for (var j = 2; j < 4; j++) {
-                console.log('i = ', i)
+                // console.log('i = ', i)
                 // console.log('j = ', j)
                 if (j == 3) {
                     if (i == Last_i_position) {
@@ -552,13 +562,16 @@ function ohlc_and_Volume_15min(candlestick_data) {
                 }
             }
             if (i < Last_i_position) {
-                // console.log('i=',i)
+                console.log('i=',i)
                 sample.push(numberArray_1[i + 4][4])
                 candlestick_data_15min.push(sample)
                 sample = []
                 i = i + 4;
+                console.log(candlestick_data_15min)
+                ohlc = candlestick_data_15min
             }
             else if (i == Last_i_position) {
+                console.log("u r on last i position")
                 if (Remainder == 1) {
                     dummy_i_new = i;
                     i = Last_i_position
@@ -590,7 +603,9 @@ function ohlc_and_Volume_15min(candlestick_data) {
                 console.log('15min Time Frame')
                 console.log(candlestick_data_15min)
                 i = i + 5;
+                console.log(candlestick_data_15min)
                 ohlc = candlestick_data_15min
+
             }
         }
 
@@ -610,8 +625,10 @@ function ohlc_and_Volume_15min(candlestick_data) {
 
 // function for 30min data
 function ohlc_and_Volume_30min() {
-    $.ajaxSetup({ async: false });  // to stop async 
+  //  $.ajaxSetup({ async: false });  // to stop async 
     if (counter_for_Nifty_30min == 0) {
+        counter_for_Nifty_30min += 0
+        console.log("30 MIN FUNCTION CALL")
         counter_for_Nifty_30min += 1
         ohlc_and_Volume_15min(Candle_data)
         console.log("ohlc = ", ohlc)
@@ -620,9 +637,13 @@ function ohlc_and_Volume_30min() {
         let Quotient_New = Math.trunc(ohlc.length / 2);
         let Remainder_New = ohlc.length % 2;
         let Last_i_position_New = Quotient_New * 2;
+        console.log("Last_i_position_New:",Last_i_position_New)
         console.log('Quotient_New = ', Quotient_New)
         console.log('ohlc = ', ohlc)
-        for (var i = 0; i < ohlc.length; i++) {
+        console.log("ohlc length:",ohlc.length)
+        data_length = ohlc.length;
+        for (var i = 0; i < data_length; i++) {
+            console.log('going in the loop for',i,"times")
             sample_1.push(ohlc[i][0], ohlc[i][1])
             for (var j = 2; j < 4; j++) {
                 console.log('i = ', i)
@@ -668,11 +689,12 @@ function ohlc_and_Volume_30min() {
             }
             if (i < Last_i_position_New) {
                 // console.log('i=',i)
-                sample_1.push(ohlc[i + 1][4])
-                candlestick_data_30min.push(sample_1)
-                sample_1 = []
+                sample_1.push(ohlc[i + 1][4]);
+                candlestick_data_30min.push(sample_1);
+                sample_1 = [];
                 i = i + 1;
-                console.log(candlestick_data_30min)
+                console.log(candlestick_data_30min);
+                ohlc_1 = candlestick_data_30min
             }
             else if (i == Last_i_position_New) {
                 if (Remainder_New == 1) {
@@ -685,10 +707,10 @@ function ohlc_and_Volume_30min() {
                 console.log('30min Time Frame')
                 console.log(candlestick_data_30min)
                 // i = i + 2
-                ohlc = candlestick_data_30min
+                ohlc_1 = candlestick_data_30min
             }
         }
-
+        ohlc = ohlc_1
         Volume_2_exp_2_30min = []
         for (var i = 0; i < Array_1.length; i++) {
             Volume_2_exp_2_30min.push({
@@ -801,7 +823,7 @@ $(document).ready(function () {
                 tooltipArray = ['<b>' + moment.unix(this.x).format('h:mm a') + '</b>']
                 for (var i = 0; i < this.points.length; i++) {
                     if (i == 0) {
-                        console.log(this.points[i].y)
+                        // console.log(this.points[i].y)
                         for (var j = 0; j < ohlc.length; j++) {
                             if (this.points[i].y == ohlc[j][4]) {
                                 i = j
@@ -1490,8 +1512,8 @@ $(document).ready(function () {
         if ($('#nifty_btn').hasClass('gb_active') && x == 1 && y == 0) {
             compare = 0;
             counter_for_Nifty_3min = 0
-            
-        call_Candlestick_API('NIFTY 50');
+
+            call_Candlestick_API('NIFTY 50');
             call_Volume_API('NIFTY 50', Nifty_exp_2);
             call_Bottom_Right_Bar_API('NIFTY 50', Nifty_exp_2, Expiry_data[1][1]);
             call_Dial_API('NIFTY 50', Nifty_exp_2, Expiry_data[1][1]);
